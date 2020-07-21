@@ -22,7 +22,6 @@ function addToCart(item) {
 }
 
 function viewCart() {
-  console.log(cart)
   if (cart.length === 0) {
     return "Your shopping cart is empty."
   }
@@ -42,9 +41,9 @@ function viewCart() {
 }
 
 function total() {
-  var sum = parseInt(cart[0].itemPrice)
-  for (let i = 1 ; i < cart.length; i++) {
-    sum = sum + parseInt(cart[i].itemPrice)
+  var sum = 0
+  for (let i = 0 ; i < cart.length; i++) {
+    sum += parseInt(cart[i].itemPrice)
   }
   return sum
 }
@@ -62,8 +61,9 @@ function removeFromCart(item) {
 function placeOrder(cardNumber) {
   if (!cardNumber){
     return `Sorry, we don't have a credit card on file for you.`
+  } else {
+    var cost =  total()
+    cart.splice(0)
+    return `Your total cost is $${cost}, which will be charged to the card ${cardNumber}.`
   }
-  var cost =  total()
-  cart.splice(0)
-  return `Your total cost is $${cost}, which will be charged to the card ${cardNumber}.`
 }
